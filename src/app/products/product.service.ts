@@ -1,4 +1,4 @@
-import { CreateProductoDto } from './product.dto';
+import { CreateProductoDto, UpdateProductDto } from './product.dto';
 import { Product } from './product.model';
 import { faker } from '@faker-js/faker';
 import { Id } from '../../utilities/id.model';
@@ -23,23 +23,15 @@ export const addProduct = (data: CreateProductoDto): Product => {
   return newProduct;
 };
 
-export const updateProduct = (id: Id, data: Product) => {
-  let product: Product | undefined = products.find((x) => x.id === id);
+export const updateProduct = (id: Id, cambios: UpdateProductDto) => {
+  let index: number = products.findIndex((x) => x.id === id);
+  const prevData = products[index];
+  products[index] = {
+    ...prevData,
+    ...cambios,
+  };
 
-  if (product != undefined) {
-    product.description = data.description;
-    product.category = data.category;
-    product.color = data.color;
-    product.image = data.image;
-    product.isNew = data.isNew;
-    product.price = data.price;
-    product.size = data.size;
-    product.tags = data.tags;
-    product.title = data.title;
-    product.stock = data.stock;
-  } else {
-    console.log('El producto no existe', data);
-  }
+  return products[index];
 };
 
 export const deleteProduct = (data: Product) => {};
