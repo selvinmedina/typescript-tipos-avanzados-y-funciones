@@ -1,7 +1,10 @@
-import { CreateProductoDto, UpdateProductDto } from './product.dto';
+import {
+  CreateProductoDto,
+  FindProductDto,
+  UpdateProductDto,
+} from './product.dto';
 import { Product } from './product.model';
 import { faker } from '@faker-js/faker';
-import { Id } from '../../utilities/id.model';
 
 export const products: Product[] = [];
 
@@ -23,7 +26,7 @@ export const addProduct = (data: CreateProductoDto): Product => {
   return newProduct;
 };
 
-export const updateProduct = (id: Id, cambios: UpdateProductDto) => {
+export const updateProduct = (id: Product['id'], cambios: UpdateProductDto) => {
   let index: number = products.findIndex((x) => x.id === id);
   const prevData = products[index];
   products[index] = {
@@ -36,4 +39,12 @@ export const updateProduct = (id: Id, cambios: UpdateProductDto) => {
 
 export const deleteProduct = (data: Product) => {};
 
-export const findOneProduct = (data: Product) => {};
+export const findProducts = (dto: FindProductDto): Product[] => {
+  // code
+
+  // dto.tags = [];
+  // dto.tags?.push('fdfdfadfd');
+  // dto.tags?.pop();
+
+  return products;
+};
